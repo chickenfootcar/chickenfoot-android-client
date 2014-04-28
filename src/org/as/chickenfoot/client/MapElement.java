@@ -52,7 +52,7 @@ public class MapElement {
 	}
 	
 	public String toString() {
-        return object.toString() + "\0";
+        return object.toString() + "";
 
     }
 

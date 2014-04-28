@@ -1,5 +1,6 @@
 package org.as.chickenfoot.client;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -21,6 +22,8 @@ public class ControlClient {
 	private ArrayList<ClientListener> listeners = new ArrayList<ClientListener>();
 	private String host = "";
 	private int port = 0;
+	BufferedReader in;
+	PrintWriter out;
 	
 	public ControlClient() {
 		fwCommand = new MapElement();
@@ -55,14 +58,8 @@ public class ControlClient {
 	
 	private void send(String message) {
 		try {
-			PrintWriter out = new PrintWriter(new BufferedWriter(
-					new OutputStreamWriter(socket.getOutputStream())), true);
 			out.println(message);
 			return;
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,6 +82,8 @@ public class ControlClient {
 		try {
 			InetAddress serverAddr = InetAddress.getByName(host);
 			socket = new Socket(serverAddr, port);
+			out = new PrintWriter(new BufferedWriter(
+					new OutputStreamWriter(socket.getOutputStream())), true);
 			for (ClientListener listener : listeners)
 				listener.onConnect();
 			return;
