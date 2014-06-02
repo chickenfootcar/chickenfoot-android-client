@@ -1,6 +1,5 @@
 package org.as.chickenfoot.client;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -22,7 +21,6 @@ public class ControlClient {
 	private ArrayList<ClientListener> listeners = new ArrayList<ClientListener>();
 	private String host = "";
 	private int port = 0;
-	BufferedReader in;
 	PrintWriter out;
 	
 	public ControlClient() {

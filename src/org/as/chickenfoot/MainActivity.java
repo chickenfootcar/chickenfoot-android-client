@@ -1,7 +1,11 @@
 package org.as.chickenfoot;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.as.chickenfoot.client.ClientListener;
 import org.as.chickenfoot.client.ControlClient;
+import org.as.chickenfoot.client.TemperatureService;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -9,8 +13,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,6 +29,7 @@ public class MainActivity extends Activity {
 
 	private ControlClient client = new ControlClient();
 	private MainClientListener listener = new MainClientListener();
+	private TemperatureService tempService = new TemperatureService();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +72,47 @@ public class MainActivity extends Activity {
 		}
 
 	}
+	
+	public void startTemperatureTask() {
+	    final Handler handler = new Handler();
+	    Timer timer = new Timer();
+	    TimerTask doAsynchronousTask = new TimerTask() {       
+	        @Override
+	        public void run() {
+	            handler.post(new Runnable() {
+	                public void run() {       
+	                    try {
+	                    	TemperatureTask temperatureTask = new TemperatureTask();
+	                    	temperatureTask.execute();
+	                    } catch (Exception e) {
+	                    }
+	                }
+	            });
+	        }
+	    };
+	    timer.schedule(doAsynchronousTask, 0, 5000); //execute in every 50000 ms
+	}
+	
+	private class TemperatureTask extends AsyncTask<String, Float, Float> {
+
+		@Override
+		protected void onPreExecute() {
+
+		}
+
+		@Override
+		protected Float doInBackground(String... params) {
+			return tempService.readTemperature();
+		}
+
+		@Override
+		protected void onPostExecute(Float temperature) {
+			Log.e("TEMPERATURE", "Temperature " + temperature);
+			((TextView)MainActivity.this.findViewById(R.id.temperature)).setText("" + temperature + "°C");
+		}
+
+		
+	}
 
 	private class ConnectionTask extends AsyncTask<String, Void, Void> {
 
@@ -88,6 +136,7 @@ public class MainActivity extends Activity {
 				
 			}
 			client.connect(host, port);
+			tempService.connect(host, 5006);
 			return null;
 		}
 
@@ -96,6 +145,7 @@ public class MainActivity extends Activity {
 			if (this.dialog.isShowing()) {
 				this.dialog.dismiss();
 			}
+			startTemperatureTask();
 		}
 
 		@Override

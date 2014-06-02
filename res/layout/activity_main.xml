@@ -77,6 +77,16 @@
             android:textStyle="bold"
             android:gravity="center"
             android:text="" />
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:text="" />
     </LinearLayout>
 
     <LinearLayout
