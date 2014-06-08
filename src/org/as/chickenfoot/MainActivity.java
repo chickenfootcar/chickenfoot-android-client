@@ -74,23 +74,8 @@ public class MainActivity extends Activity {
 	}
 	
 	public void startTemperatureTask() {
-	    final Handler handler = new Handler();
-	    Timer timer = new Timer();
-	    TimerTask doAsynchronousTask = new TimerTask() {       
-	        @Override
-	        public void run() {
-	            handler.post(new Runnable() {
-	                public void run() {       
-	                    try {
-	                    	TemperatureTask temperatureTask = new TemperatureTask();
-	                    	temperatureTask.execute();
-	                    } catch (Exception e) {
-	                    }
-	                }
-	            });
-	        }
-	    };
-	    timer.schedule(doAsynchronousTask, 0, 5000); //execute in every 50000 ms
+		TemperatureTask temperatureTask = new TemperatureTask();
+		temperatureTask.execute();
 	}
 	
 	private class TemperatureTask extends AsyncTask<String, Float, Float> {
@@ -102,13 +87,15 @@ public class MainActivity extends Activity {
 
 		@Override
 		protected Float doInBackground(String... params) {
-			return tempService.readTemperature();
+			float temperature = tempService.readTemperature();
+			return temperature;
 		}
 
 		@Override
 		protected void onPostExecute(Float temperature) {
 			Log.e("TEMPERATURE", "Temperature " + temperature);
 			((TextView)MainActivity.this.findViewById(R.id.temperature)).setText("" + temperature + "°C");
+			startTemperatureTask();
 		}
 
 		

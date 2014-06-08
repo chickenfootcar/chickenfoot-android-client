@@ -33,7 +33,10 @@ public class TemperatureService {
 	public float readTemperature() {
 		float temp = 0.0f;
 		try {
-			temp = Float.parseFloat(in.readLine());
+			String line = in.readLine();
+			if (line != null) {
+				temp = Float.parseFloat(in.readLine());
+			}
 			Log.e("TEMPERATURE", "Temperature " + temp);
 		} catch (IOException e) {
 			e.printStackTrace();
