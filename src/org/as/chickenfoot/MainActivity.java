@@ -1,11 +1,10 @@
 package org.as.chickenfoot;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import org.as.chickenfoot.client.ClientListener;
 import org.as.chickenfoot.client.ControlClient;
 import org.as.chickenfoot.client.TemperatureService;
+import org.as.mjpeg.MjpegInputStream;
+import org.as.mjpeg.MjpegView;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -13,7 +12,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -21,7 +19,10 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,18 +31,23 @@ public class MainActivity extends Activity {
 	private ControlClient client = new ControlClient();
 	private MainClientListener listener = new MainClientListener();
 	private TemperatureService tempService = new TemperatureService();
+	private MjpegView mv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+	                
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        
 		setContentView(R.layout.activity_main);
-		if (BuildConfig.DEBUG) {
-			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-					.permitAll().build();
-			StrictMode.setThreadPolicy(policy);
-		}
-		initCommands();
-		startConnection();
+		
+		initVideoStreaming();
+		//initCommands();
 	}
 
 	private class MainClientListener implements ClientListener {
@@ -152,6 +158,18 @@ public class MainActivity extends Activity {
 	private void startConnection() {
 		client.addListener(listener);
 		(new ConnectionTask()).execute();
+	}
+	
+	private void initVideoStreaming() {
+        String URL = "http://192.168.0.18:8090/?action=stream";
+        
+        mv = new MjpegView(this);
+        mv.setSource(MjpegInputStream.read(URL));
+        mv.setDisplayMode(MjpegView.SIZE_BEST_FIT);
+        mv.showFps(true);
+        
+        LinearLayout videoView = (LinearLayout) findViewById(R.id.stream_video);  
+        videoView.addView(mv);
 	}
 
 	private void initCommands() {
