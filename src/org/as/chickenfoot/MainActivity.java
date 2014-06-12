@@ -166,7 +166,7 @@ public class MainActivity extends Activity {
         mv = new MjpegView(this);
         mv.setSource(MjpegInputStream.read(URL));
         mv.setDisplayMode(MjpegView.SIZE_BEST_FIT);
-        mv.showFps(true);
+        //mv.showFps(true);
         
         LinearLayout videoView = (LinearLayout) findViewById(R.id.stream_video);  
         videoView.addView(mv);
