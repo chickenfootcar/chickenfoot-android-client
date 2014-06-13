@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		initVideoStreaming();
-		//initCommands();
+		initCommands();
 	}
 
 	private class MainClientListener implements ClientListener {
