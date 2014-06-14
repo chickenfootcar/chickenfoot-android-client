@@ -6,7 +6,6 @@ proguard-project.txt
 .classpath
 .project
 .settings
-assets/
 gen/
 bin/
 libs/

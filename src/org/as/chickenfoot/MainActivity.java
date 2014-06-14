@@ -1,5 +1,7 @@
 package org.as.chickenfoot;
 
+import java.io.IOException;
+
 import org.as.chickenfoot.client.ClientListener;
 import org.as.chickenfoot.client.ControlClient;
 import org.as.chickenfoot.client.TemperatureService;
@@ -10,6 +12,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -46,8 +50,27 @@ public class MainActivity extends Activity {
         
 		setContentView(R.layout.activity_main);
 		
+		playIntro();
 		initVideoStreaming();
 		initCommands();
+	}
+	
+	private void playIntro() {
+		try {
+			AssetFileDescriptor afd;
+			afd = getAssets().openFd("markyell1.mp3");
+			MediaPlayer player = new MediaPlayer();
+			player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+			player.prepare();
+			player.start();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	private class MainClientListener implements ClientListener {
