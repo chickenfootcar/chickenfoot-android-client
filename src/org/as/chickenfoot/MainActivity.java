@@ -50,9 +50,10 @@ public class MainActivity extends Activity {
         
 		setContentView(R.layout.activity_main);
 		
-		playIntro();
+		//playIntro();
 		initVideoStreaming();
 		initCommands();
+		playIntro();
 	}
 	
 	private void playIntro() {
@@ -152,7 +153,7 @@ public class MainActivity extends Activity {
 				
 			}
 			client.connect(host, port);
-			tempService.connect(host, 5006);
+			tempService.connect(host, Integer.parseInt(settings.getString("port-temp", "5006")));
 			return null;
 		}
 
@@ -184,7 +185,10 @@ public class MainActivity extends Activity {
 	}
 	
 	private void initVideoStreaming() {
-        String URL = "http://192.168.0.18:8090/?action=stream";
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+		String host = settings.getString("host", "0.0.0.0");
+		int portVideoStream = Integer.parseInt(settings.getString("port-video", "8090"));
+		String URL = String.format("http://%s:%d/?action=stream", host, portVideoStream);
         
         mv = new MjpegView(this);
         mv.setSource(MjpegInputStream.read(URL));
