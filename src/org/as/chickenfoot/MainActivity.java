@@ -50,28 +50,13 @@ public class MainActivity extends Activity {
         
 		setContentView(R.layout.activity_main);
 		
-		//playIntro();
 		initVideoStreaming();
 		initCommands();
 		playIntro();
 	}
 	
 	private void playIntro() {
-		try {
-			AssetFileDescriptor afd;
-			afd = getAssets().openFd("markyell1.mp3");
-			MediaPlayer player = new MediaPlayer();
-			player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-			player.prepare();
-			player.start();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		Utils.playSoundFromAssets(this, "markyell1.mp3");
 	}
 
 	private class MainClientListener implements ClientListener {
