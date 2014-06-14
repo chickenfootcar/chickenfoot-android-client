@@ -11,16 +11,16 @@ public class Utils {
 	public static void playSoundFromAssets(Context ctx, String fileName) {
 		try {
 			AssetFileDescriptor afd;
-			afd = ctx.getAssets().openFd("markyell1.mp3");
+			afd = ctx.getAssets().openFd(fileName);
 			MediaPlayer player = new MediaPlayer();
 			player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-			player.prepareAsync();
 			player.setOnPreparedListener(new OnPreparedListener() {
 				@Override
 				public void onPrepared(MediaPlayer player) {
 					player.start();
 				}
 			});
+			player.prepareAsync();
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IllegalStateException e) {
