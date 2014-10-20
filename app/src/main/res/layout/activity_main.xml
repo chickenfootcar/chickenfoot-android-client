@@ -1,0 +1,137 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#353535"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:id="@+id/stream_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:padding="20dp" >
+
+        <ImageButton
+            android:id="@+id/btn_up"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:background="@null"
+            android:src="@drawable/control_button" />
+
+        <ImageButton
+            android:id="@+id/btn_down"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:background="@null"
+            android:rotation="180"
+            android:src="@drawable/control_button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal"
+        android:padding="20dp" >
+
+        <ImageButton
+            android:id="@+id/btn_left"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:background="@null"
+            android:rotation="270"
+            android:src="@drawable/control_button" />
+
+        <ImageButton
+            android:id="@+id/btn_right"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:background="@null"
+            android:rotation="90"
+            android:src="@drawable/control_button" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="#99000000"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true" >
+
+        <LinearLayout
+            android:id="@+id/connection_status_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/btn_symbol"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:onClick="startConnection"
+                android:src="@drawable/symbol" />
+
+            <TextView
+                android:id="@+id/connection_status"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=""
+                android:textColor="#FFF"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:gravity="center"
+                android:text=""
+                android:textColor="#FFF"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/lights_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageButton
+                android:id="@+id/btn_reconnect"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:onClick="startConnection"
+                android:src="@drawable/connection_button" />
+
+            <ImageButton
+                android:id="@+id/btn_settings"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:onClick="openSettings"
+                android:src="@drawable/settings_button" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

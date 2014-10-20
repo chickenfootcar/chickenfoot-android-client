@@ -1,0 +1,36 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:key="notifications_settings"
+        android:title="Connection" >
+
+        <EditTextPreference
+            android:dialogTitle="Host"
+            android:key="host"
+            android:summary="Set the host of your Chickenfoot"
+            android:defaultValue="0.0.0.0"
+            android:title="Host" />
+
+        <EditTextPreference
+            android:dialogTitle="Command port"
+            android:key="port"
+            android:summary="Set the port of your Chickenfoot"
+            android:defaultValue="5005"
+            android:title="Command port" />
+        
+        <EditTextPreference
+            android:dialogTitle="Temperature port"
+            android:key="port-temp"
+            android:summary="Set the port for temperature service of your Chickenfoot"
+            android:defaultValue="5006"
+            android:title="Temperature port" />
+        
+        <EditTextPreference
+            android:dialogTitle="Video streaming port"
+            android:key="port-video"
+            android:summary="Set the port for video streaming service of your Chickenfoot"
+            android:defaultValue="8090"
+            android:title="Video streaming port" />
+    </PreferenceCategory>
+
+</PreferenceScreen><!-- From: file:/Users/astagi/w/Chickenfoot1/app/src/main/res/xml/preferences.xml -->

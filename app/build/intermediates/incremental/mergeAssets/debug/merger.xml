@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="2" >
+
+    <dataSet config="21.0.0-rc1" >
+        <source path="/Users/astagi/w/Chickenfoot1/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0-rc1/assets" />
+    </dataSet>
+    <dataSet config="unspecified" >
+        <source path="/Users/astagi/w/Chickenfoot1/app/build/intermediates/exploded-aar/Chickenfoot1.libraries/mjpegview/unspecified/assets" />
+    </dataSet>
+    <dataSet config="main" >
+        <source path="/Users/astagi/w/Chickenfoot1/app/src/main/assets" >
+            <file
+                name="markyell1.mp3"
+                path="/Users/astagi/w/Chickenfoot1/app/src/main/assets/markyell1.mp3" />
+            <file
+                name="markyell2.mp3"
+                path="/Users/astagi/w/Chickenfoot1/app/src/main/assets/markyell2.mp3" />
+            <file
+                name="My Song.band/Contents/PkgInfo"
+                path="/Users/astagi/w/Chickenfoot1/app/src/main/assets/My Song.band/Contents/PkgInfo" />
+            <file
+                name="My Song.band/Media/07 Ahh.aif"
+                path="/Users/astagi/w/Chickenfoot1/app/src/main/assets/My Song.band/Media/07 Ahh.aif" />
+            <file
+                name="My Song.band/Media/09 Oooh.aif"
+                path="/Users/astagi/w/Chickenfoot1/app/src/main/assets/My Song.band/Media/09 Oooh.aif" />
+            <file
+                name="My Song.band/Media/11 Herb laugh.aif"
+                path="/Users/astagi/w/Chickenfoot1/app/src/main/assets/My Song.band/Media/11 Herb laugh.aif" />
+            <file
+                name="My Song.band/Output/arrange_screenshot.tiff"
+                path="/Users/astagi/w/Chickenfoot1/app/src/main/assets/My Song.band/Output/arrange_screenshot.tiff" />
+            <file
+                name="My Song.band/Output/metadata.plist"
+                path="/Users/astagi/w/Chickenfoot1/app/src/main/assets/My Song.band/Output/metadata.plist" />
+            <file
+                name="My Song.band/projectData"
+                path="/Users/astagi/w/Chickenfoot1/app/src/main/assets/My Song.band/projectData" />
+        </source>
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/Users/astagi/w/Chickenfoot1/app/src/debug/assets" />
+    </dataSet>
+
+</merger>
